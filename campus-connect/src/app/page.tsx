@@ -35,6 +35,13 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Check for temporary login
+    const user = localStorage.getItem('campus_connect_user');
+    if (!user) {
+      window.location.href = '/login';
+      return;
+    }
+
     const delayDebounceFn = setTimeout(() => {
       fetchProfiles();
     }, 300); // debounce API calls
@@ -49,6 +56,9 @@ export default function Home() {
           <p>Find peers anonymously.</p>
         </div>
         <div className={styles.actions}>
+          <Link href="/projects" className={`button-primary ${styles.gameModeBtn}`} style={{ marginRight: '10px', background: 'var(--card-bg)', border: '1px solid var(--neon-pink)', color: 'var(--neon-pink)' }}>Projects Board 💼</Link>
+          <Link href="/about" className={`button-primary ${styles.gameModeBtn}`} style={{ marginRight: '10px', background: 'var(--card-bg)', border: '1px solid var(--neon-cyan)', color: 'var(--neon-cyan)' }}>Our Vision 🚀</Link>
+          <Link href="/games" className={`button-primary ${styles.gameModeBtn}`} style={{ marginRight: '10px', background: 'var(--card-bg)', border: '1px solid var(--accent-color)', color: 'var(--accent-color)' }}>Games Mode 🎮</Link>
           <Link href="/submit" className="button-primary">Add Profile</Link>
         </div>
       </header>

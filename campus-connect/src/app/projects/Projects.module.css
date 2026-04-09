@@ -1,0 +1,89 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.logo h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px dashed var(--card-border);
+  border-radius: 16px;
+  margin-top: 2rem;
+  grid-column: 1 / -1;
+}
+
+.emptyState h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.formCard {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldGroup label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cancelLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.cancelLink:hover {
+  color: white;
+}

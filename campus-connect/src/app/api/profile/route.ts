@@ -54,7 +54,7 @@ export async function POST(request: Request) {
 
         // Secure Image Uploading
         const photo = formData.get('photo') as File | null;
-        let photo_url = null;
+        let photo_url = formData.get('avatarUrl') as string | null;
 
         if (photo && photo.size > 0 && photo.size < 5 * 1024 * 1024) { // Max 5MB
             const fileExt = photo.name.split('.').pop() || 'jpg';

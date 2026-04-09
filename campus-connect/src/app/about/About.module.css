@@ -1,0 +1,106 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+}
+
+.section {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section h2 {
+  font-size: 2rem;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.highlightBox {
+  background: rgba(34, 211, 238, 0.1);
+  border-left: 4px solid var(--neon-cyan);
+  padding: 1.5rem;
+  border-radius: 0 12px 12px 0;
+  margin: 1rem 0;
+}
+
+.instagramHighlights {
+  background: linear-gradient(135deg, rgba(193, 53, 132, 0.1), rgba(253, 29, 29, 0.1));
+  border: 1px solid rgba(193, 53, 132, 0.3);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-top: 1rem;
+}
+
+.instagramHighlights h3 {
+  color: #fbcfe8;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.instagramHighlights p {
+  color: #fce7f3;
+}
+
+/* Instagram specific button aesthetic */
+.igButton {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(220, 39, 67, 0.4);
+}
+
+.igButton:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(220, 39, 67, 0.6);
+}
+
+.footerActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}

@@ -1,49 +1,42 @@
+/* Re-fetching default styles and appending avatar ones */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    position: relative;
+    z-index: 10;
 }
 
 .formCard {
+    max-width: 600px;
     width: 100%;
-    padding: 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    padding: 2rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
 .header h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
+    background: var(--gradient-text);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-weight: 800;
 }
 
 .header p {
     color: var(--text-secondary);
-    font-size: 1.1rem;
 }
 
 .form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-}
-
-.row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-}
-
-@media (max-width: 600px) {
-    .row {
-        grid-template-columns: 1fr;
-    }
 }
 
 .fieldGroup {
@@ -53,41 +46,56 @@
 }
 
 .fieldGroup label {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #e2e8f0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
 }
 
-.fileInput {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 8px;
+.row {
+    display: flex;
+    gap: 1rem;
+}
+.row > div {
+    flex: 1;
 }
 
-.fileInput::file-selector-button {
-    background: var(--accent-color);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 999px;
-    margin-right: 16px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.2s;
-}
-
-.fileInput::file-selector-button:hover {
-    background: var(--accent-hover);
+@media (max-width: 600px) {
+    .row {
+        flex-direction: column;
+    }
 }
 
 .error {
-    background: rgba(239, 68, 68, 0.15);
-    border-left: 4px solid #ef4444;
-    color: #fca5a5;
+    background: rgba(236, 72, 153, 0.1);
+    border: 1px solid rgba(236, 72, 153, 0.3);
+    color: var(--neon-pink);
     padding: 1rem;
-    border-radius: 4px;
-    font-weight: 500;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.successMessage {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.checkmark {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--accent-color), var(--neon-pink));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: white;
+    margin: 0 auto 1.5rem;
+    animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .actions {
@@ -96,60 +104,63 @@
     align-items: center;
     gap: 1.5rem;
     margin-top: 1rem;
-    border-top: 1px solid var(--card-border);
-    padding-top: 2rem;
 }
 
 .cancelLink {
     color: var(--text-secondary);
     text-decoration: none;
-    font-weight: 500;
+    font-size: 0.9rem;
     transition: color 0.2s;
 }
 
 .cancelLink:hover {
-    color: white;
+    color: var(--text-primary);
 }
 
-.successMessage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* Avatar Selection */
+.avatarGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
     gap: 1rem;
-    padding: 4rem 0;
-    text-align: center;
+    margin-top: 0.5rem;
 }
 
-.checkmark {
-    width: 80px;
-    height: 80px;
-    background: #10b981;
-    color: white;
+.avatarOption {
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
-    font-weight: bold;
-    animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    align-items: center;
 }
 
-@keyframes scaleIn {
-    from {
-        transform: scale(0);
-    }
-
-    to {
-        transform: scale(1);
-    }
+.avatarOption img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
 }
 
-.successMessage h2 {
-    color: #10b981;
-    font-size: 2rem;
+.avatarOption:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
 }
 
-.successMessage p {
-    color: var(--text-secondary);
+.selectedAvatar {
+    border-color: var(--neon-pink);
+    background: rgba(236, 72, 153, 0.2);
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+    transform: scale(1.1);
+}
+
+.fileInput {
+    padding: 8px;
+}
+
+.fileHint {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    margin-top: 5px;
 }

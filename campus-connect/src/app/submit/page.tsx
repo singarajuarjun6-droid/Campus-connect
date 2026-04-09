@@ -6,12 +6,7 @@ import Link from 'next/link';
 import styles from './page.module.css';
 
 function generateFingerprint() {
-    let fp = localStorage.getItem('campus_connect_fp');
-    if (!fp) {
-        fp = 'fp_' + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
-        localStorage.setItem('campus_connect_fp', fp);
-    }
-    return fp;
+    return 'fp_' + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
 }
 
 export default function SubmitProfile() {
@@ -30,12 +25,19 @@ export default function SubmitProfile() {
         bot_field: ''
     });
     const [photo, setPhoto] = useState<File | null>(null);
+    const [selectedAvatar, setSelectedAvatar] = useState<string>('');
+
+    const AVATAR_OPTIONS = [
+        'https://api.dicebear.com/7.x/avataaars/svg?seed=Batman',
+        'https://api.dicebear.com/7.x/avataaars/svg?seed=Superman',
+        'https://api.dicebear.com/7.x/avataaars/svg?seed=WonderWoman',
+        'https://api.dicebear.com/7.x/avataaars/svg?seed=Spiderman',
+        'https://api.dicebear.com/7.x/avataaars/svg?seed=Flash',
+        'https://api.dicebear.com/7.x/avataaars/svg?seed=Joker'
+    ];
 
     useEffect(() => {
-        const submitted = localStorage.getItem('campus_connect_submitted');
-        if (submitted) {
-            setError('You have already submitted a profile from this device. Please wait until it expires to submit a new one.');
-        }
+        // Feature removed
     }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -59,11 +61,6 @@ export default function SubmitProfile() {
         e.preventDefault();
         setError('');
 
-        if (localStorage.getItem('campus_connect_submitted')) {
-            setError('You have already submitted a profile.');
-            return;
-        }
-
         if (!formData.university || !formData.contact) {
             setError('University and Contact are required.');
             return;
@@ -84,6 +81,8 @@ export default function SubmitProfile() {
 
         if (photo) {
             data.append('photo', photo);
+        } else if (selectedAvatar) {
+            data.append('avatarUrl', selectedAvatar);
         }
 
         try {
@@ -96,7 +95,6 @@ export default function SubmitProfile() {
 
             if (res.ok) {
                 setSuccess(true);
-                localStorage.setItem('campus_connect_submitted', 'true');
                 setTimeout(() => {
                     router.push('/');
                 }, 2000);
@@ -155,8 +153,24 @@ export default function SubmitProfile() {
                         </div>
 
                         <div className={styles.fieldGroup}>
-                            <label>Photo (Optional, max 5MB)</label>
-                            <input type="file" accept="image/jpeg, image/png, image/webp" onChange={handlePhotoChange} className={styles.fileInput} />
+                            <label>Choose an Avatar OR Upload a Photo</label>
+                            
+                            <div className={styles.avatarGrid}>
+                                {AVATAR_OPTIONS.map((avatar, idx) => (
+                                    <div 
+                                        key={idx} 
+                                        className={`${styles.avatarOption} ${selectedAvatar === avatar ? styles.selectedAvatar : ''}`}
+                                        onClick={() => { setSelectedAvatar(avatar); setPhoto(null); }}
+                                    >
+                                        <img src={avatar} alt={`Avatar ${idx}`} />
+                                    </div>
+                                ))}
+                            </div>
+
+                            <p style={{ textAlign: 'center', margin: '10px 0', color: 'var(--text-secondary)' }}>or</p>
+
+                            <input type="file" accept="image/jpeg, image/png, image/webp" onChange={(e) => { handlePhotoChange(e); setSelectedAvatar(''); }} className={styles.fileInput} />
+                            {photo && <p className={styles.fileHint}>Selected file: {photo.name}</p>}
                         </div>
 
                         {/* Anti-spam mechanism */}
@@ -175,7 +189,7 @@ export default function SubmitProfile() {
                             <button
                                 type="submit"
                                 className="button-primary"
-                                disabled={loading || error === 'You have already submitted a profile from this device. Please wait until it expires to submit a new one.'}
+                                disabled={loading}
                             >
                                 {loading ? 'Submitting...' : 'Post Profile'}
                             </button>

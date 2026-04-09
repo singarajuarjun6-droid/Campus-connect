@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.card {
+  max-width: 400px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.card h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.input {
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 1rem;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.error {
+  color: var(--neon-pink);
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  text-align: left;
+}
